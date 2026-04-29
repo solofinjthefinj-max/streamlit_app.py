@@ -2,112 +2,144 @@ import streamlit as st
 import requests
 
 # --- إعدادات الصفحة ---
-st.set_page_config(page_title="EcomMind AI", layout="wide")
+st.set_page_config(page_title="EcomMind AI Pro", layout="wide")
 
-# تصميم الواجهة CSS المتطور
+# تصميم الواجهة الاحترافية (CSS)
 st.markdown("""
     <style>
-    /* الخلفية العامة */
-    .main { background-color: #0b0e14; color: #e8eaed; }
-    .stApp { background-color: #0b0e14; }
-    
-    /* العنوان الرئيسي بتأثير شعاعي */
-    h1 {
-        background: radial-gradient(circle, #00f2ff 0%, #0062ff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    /* خلفية سينمائية مرتبطة بالذكاء الاصطناعي */
+    .stApp {
+        background: linear-gradient(rgba(11, 14, 20, 0.8), rgba(11, 14, 20, 0.9)), 
+        url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* العنوان الرئيسي (حاد وشعاعي) */
+    .neon-title {
+        font-family: 'Arial Black', sans-serif;
+        color: #00f2ff;
         text-align: center;
-        font-size: 3.5rem !important;
+        font-size: 4rem !important;
         font-weight: 900;
-        filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.5));
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        text-shadow: 0 0 5px #00f2ff, 0 0 10px #00f2ff, 0 0 20px #00d4ff;
+        margin-bottom: 0px;
     }
 
-    /* كرت إدخال البيانات */
-    .glass-card {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(0, 242, 255, 0.2);
-        border-radius: 24px;
-        padding: 30px;
-        margin-top: 20px;
-        box-shadow: 0 0 20px rgba(0, 242, 255, 0.05);
-    }
-
-    /* نص الذكاء الاصطناعي المتوهج */
+    /* نص الذكاء الاصطناعي (أزرق ليزر حاد) */
     .ai-response {
-        color: #00f2ff; /* اللون الأزرق الشعاعي */
-        text-shadow: 0 0 8px rgba(0, 242, 255, 0.8), 0 0 20px rgba(0, 242, 255, 0.4);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.8;
-        font-size: 1.1rem;
-        background: rgba(0, 242, 255, 0.05);
-        padding: 20px;
-        border-radius: 15px;
-        border-right: 4px solid #00f2ff;
+        color: #00f2ff;
+        font-weight: bold;
+        text-shadow: 0 0 2px #00f2ff; /* حاد وغير باهت */
+        font-size: 1.2rem;
+        background: rgba(0, 242, 255, 0.08);
+        padding: 25px;
+        border-radius: 12px;
+        border: 2px solid #00f2ff;
+        box-shadow: inset 0 0 15px rgba(0, 242, 255, 0.2);
+        line-height: 1.6;
         direction: rtl;
+    }
+
+    /* نوافذ الاشتراك المرموقة */
+    .premium-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 4px solid #00f2ff;
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        transition: 0.4s;
+        backdrop-filter: blur(15px);
+    }
+    .premium-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 242, 255, 0.2);
+        border-color: #ffffff;
     }
 
     /* زر التوليد */
     .stButton>button {
         width: 100%;
-        background: linear-gradient(135deg, #00f2ff 0%, #0062ff 100%);
+        background: #00f2ff;
+        color: #000;
         border: none;
-        color: white;
-        padding: 18px;
-        border-radius: 15px;
-        font-weight: bold;
-        font-size: 1.2rem;
-        transition: 0.5s;
-        box-shadow: 0 4px 15px rgba(0, 98, 255, 0.3);
+        padding: 20px;
+        border-radius: 10px;
+        font-weight: 900;
+        font-size: 1.3rem;
+        box-shadow: 0 0 15px #00f2ff;
     }
     .stButton>button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0, 242, 255, 0.5);
+        background: #ffffff;
+        box-shadow: 0 0 30px #ffffff;
+        color: #000;
     }
 
-    input { background-color: #161b22 !important; color: white !important; border: 1px solid #30363d !important; }
+    input { background-color: rgba(255,255,255,0.1) !important; color: #fff !important; border: 1px solid #00f2ff !important; font-size: 1.2rem !important; }
     </style>
     """, unsafe_allow_html=True)
 
-# وظيفة المحرك الذكي
+# محرك الذكاء الاصطناعي
 def call_ai(product):
     api_key = "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"
     url = "https://api.groq.com/openai/v1/chat/completions"
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    headers = {"Authorization": f"Bearer {api_key}"}
     payload = {
         "model": "llama-3.1-8b-instant",
-        "messages": [
-            {"role": "system", "content": "أنت خبير تسويق رقمي. قدم نتائجك بنقاط واضحة ومنظمة جداً."},
-            {"role": "user", "content": f"اكتب وصفاً تسويقياً لمنتج: {product}"}
-        ]
+        "messages": [{"role": "user", "content": f"اكتب وصفاً تسويقياً لمنتج: {product}"}]
     }
     try:
         response = requests.post(url, headers=headers, json=payload, timeout=10)
         return response.json()['choices'][0]['message']['content']
     except:
-        return "فشل الاتصال بالمحرك الذكي."
+        return "فشل النظام في الاستجابة.."
 
-# واجهة المستخدم
-st.markdown("<h1>EcomMind AI</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #8b949e; margin-bottom: 30px;'>المحرك الأول لأتمتة مبيعاتك بالذكاء الاصطناعي</p>", unsafe_allow_html=True)
+# الواجهة
+st.markdown("<h1 class='neon-title'>EcomMind AI PRO</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #fff; letter-spacing: 2px;'>ADVANCED ARTIFICIAL INTELLIGENCE FOR E-COMMERCE</p>", unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-    product_name = st.text_input("📦 اسم المنتج المراد تسويقه")
-    if st.button("توليد المحتوى التسويقي ✨"):
+    st.markdown("<div style='margin-top: 40px;'>", unsafe_allow_html=True)
+    product_name = st.text_input("📦 أدخل اسم المنتج المراد تسويقه")
+    if st.button("توليد الإستراتيجية الشعاعية ✨"):
         if product_name:
-            with st.spinner('جاري البرمجة الشعاعية...'):
+            with st.spinner('PROCESSING...'):
                 result = call_ai(product_name)
-                st.markdown("---")
-                # هنا قمنا بتطبيق اللون الأزرق الشعاعي المتوهج
                 st.markdown(f"<div class='ai-response'>{result}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-# تذييل الصفحة (بياناتك)
-st.markdown("<br><br><br>", unsafe_allow_html=True)
-st.markdown(f"""
-    <div style='text-align: center; padding: 20px; border-top: 1px solid rgba(0,242,255,0.1);'>
-        <p style='color: #8b949e;'>حقوق الملكية © 2024 - EcomMind AI Pro</p>
-        <p style='color: #00f2ff; font-weight: bold;'>للاشتراك: SADAM.ALHAJ007@GMAIL.COM</p>
-    </div>
-""", unsafe_allow_html=True)
+# نوافذ الاشتراك المرموقة (The Premium Section)
+st.markdown("<br><br><br><h2 style='text-align: center; color: #fff;'>خطط العضوية الفاخرة</h2>", unsafe_allow_html=True)
+c1, c2, c3 = st.columns([1, 2, 1])
+
+with c2:
+    st.markdown(f"""
+        <div class='premium-card'>
+            <h2 style='color: #00f2ff; margin-bottom: 10px;'>EXECUTIVE PRO</h2>
+            <p style='font-size: 3rem; font-weight: bold; color: #fff;'>49$ <small style='font-size: 1rem;'>/ Monthly</small></p>
+            <hr style='border-color: rgba(0,242,255,0.2);'>
+            <div style='text-align: right; margin: 25px 0; color: #ddd; line-height: 2;'>
+                <p>✅ وصول غير محدود لمحرك Llama 3.1</p>
+                <p>✅ إنتاج خطط تسويقية كاملة في ثوانٍ</p>
+                <p>✅ دعم تقني VIP مباشر</p>
+                <p>✅ ميزة تحليل المنافسين الحصرية</p>
+            </div>
+            <div style='background: rgba(0,0,0,0.3); padding: 20px; border-radius: 15px; border: 1px solid #333;'>
+                <p style='color: #00f2ff; font-size: 0.9rem;'>PAYONEER:</p>
+                <p style='font-weight: bold; font-size: 1.1rem;'>SADAM.ALHAJ007@GMAIL.COM</p>
+                <br>
+                <p style='color: #00f2ff; font-size: 0.9rem;'>USDT (TRC20):</p>
+                <p style='font-size: 0.8rem; word-break: break-all; color: #34a853;'>TKCvNEvz59717dp5QZbrwCqCzTQqjrNxCX</p>
+            </div>
+            <a href="mailto:SADAM.ALHAJ007@GMAIL.COM" style='text-decoration: none;'>
+                <div style='margin-top: 30px; background: #fff; color: #000; padding: 15px; border-radius: 10px; font-weight: bold;'>تفعيل العضوية الآن</div>
+            </a>
+        </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br><p style='text-align: center; color: #555;'>POWERED BY SADAM AL-HAJ AI LABS</p>", unsafe_allow_html=True)
