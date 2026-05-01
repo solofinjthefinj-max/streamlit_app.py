@@ -7,21 +7,21 @@ st.set_page_config(page_title="EcomMind AI Ultra Pro", layout="wide")
 # --- التصميم المتكامل (CSS) ---
 st.markdown("""
     <style>
-    /* تنسيق الغلاف (الصورة العرضية) في الأعلى */
+    /* تنسيق الغلاف السينمائي في الأعلى */
     .cover-container {
         width: 100%;
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
     .cover-img {
         width: 100%;
-        max-width: 1000px; /* حجم الغلاف */
-        border-radius: 20px;
-        box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
-        border: 1px solid rgba(0, 242, 255, 0.2);
+        max-width: 1100px;
+        border-radius: 25px;
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
+        border: 2px solid rgba(0, 242, 255, 0.3);
     }
 
-    /* 1. الخلفية التقنية (أيقونات ذكاء اصطناعي ورموز إلكترونية) */
+    /* الخلفية التقنية النيونية */
     .stApp {
         background: linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.9)), 
         url('https://www.transparenttextures.com/patterns/carbon-fibre.png'),
@@ -32,38 +32,27 @@ st.markdown("""
         background-attachment: fixed;
     }
 
-    /* 2. العنوان النيوني الصارخ */
+    /* العنوان النيوني */
     .neon-title {
         color: #00f2ff;
         text-align: center;
-        font-size: 4rem !important;
+        font-size: 3.5rem !important;
         font-weight: 900;
         text-shadow: 0 0 20px #00f2ff, 0 0 40px #0062ff;
-        font-family: 'Courier New', Courier, monospace;
     }
 
-    /* 3. الحل الجذري والنهائي لخانة الكتابة (تحويلها لأسود نيوني) */
+    /* خانة الكتابة الداكنة */
     .stTextInput > div > div {
         background-color: rgba(0, 5, 10, 0.9) !important;
         border: 2px solid #00f2ff !important;
         border-radius: 15px !important;
-        box-shadow: 0 0 15px rgba(0, 242, 255, 0.4) !important;
     }
     .stTextInput input {
         color: #00f2ff !important;
-        background-color: transparent !important;
-        font-size: 1.3rem !important;
         font-weight: bold !important;
-        padding: 15px !important;
-    }
-    
-    /* إخفاء أي خلفية بيضاء تظهر عند النقر */
-    .stTextInput input:focus {
-        background-color: rgba(0, 242, 255, 0.1) !important;
-        outline: none !important;
     }
 
-    /* 4. نافذة الاشتراك (كريستال زجاجي مشع) */
+    /* نافذة الاشتراك الكريستالية */
     .premium-card {
         background: rgba(0, 100, 255, 0.1);
         backdrop-filter: blur(30px);
@@ -72,10 +61,9 @@ st.markdown("""
         padding: 50px;
         text-align: center;
         box-shadow: 0 0 60px rgba(0, 242, 255, 0.3);
-        margin-top: 40px;
     }
 
-    /* 5. زر تفعيل العضوية (الجوهرة الزرقاء الحادة) */
+    /* زر تفعيل العضوية */
     .glass-active-btn {
         background: linear-gradient(135deg, #00f2ff 0%, #0062ff 100%);
         border: 2px solid #fff;
@@ -87,29 +75,20 @@ st.markdown("""
         text-decoration: none;
         display: inline-block;
         box-shadow: 0 0 40px #00f2ff;
-        transition: 0.4s;
-    }
-    .glass-active-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 80px #00f2ff;
-        filter: brightness(1.2);
     }
 
-    /* أزرار التشغيل */
     .stButton > button {
         background-color: #00f2ff !important;
         color: #000 !important;
         font-weight: 900 !important;
         border-radius: 12px !important;
         height: 60px;
-        box-shadow: 0 0 20px #00f2ff;
-        border: none !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# --- إضافة الغلاف السينمائي في أعلى الصفحة ---
-# تأكد من أنك رفعت الصورة العرضية في GitHub باسم cover.png
+# --- دمج الغلاف (هذا هو الجزء الذي لم يظهر) ---
+# سنقوم باستخدام رابط الصورة العرضية التي اخترتها
 st.markdown("""
     <div class="cover-container">
         <img src="https://raw.githubusercontent.com/alhajameer4-del/Python/main/cover.png" class="cover-img">
@@ -131,41 +110,33 @@ def call_ai(product):
     except:
         return "⚠️ النظام متصل.. جاري المعالجة"
 
-# واجهة التطبيق الرئيسية
+# واجهة التطبيق
 st.markdown("<h1 class='neon-title'>ECOMMIND AI PRO</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #00f2ff; font-weight: bold; letter-spacing: 4px;'>NEURAL COMMERCE ENGINE</p>", unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     st.markdown("<div style='margin-top: 40px;'>", unsafe_allow_html=True)
-    # الخانة الآن مجبرة على اللون الداكن
     product_name = st.text_input("📦 ما هو المنتج الذي تريد تسويقه بذكاء؟", key="product_input")
     if st.button("إطلاق الذكاء الشعاعي ✨"):
         if product_name:
             with st.spinner('SYSTEM ANALYZING...'):
                 result = call_ai(product_name)
-                st.markdown(f"<div style='color:#00f2ff; background:rgba(0,0,0,0.8); padding:30px; border:2px solid #00f2ff; border-radius:20px; text-shadow: 0 0 5px #00f2ff;'>{result}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='color:#00f2ff; background:rgba(0,0,0,0.8); padding:30px; border:2px solid #00f2ff; border-radius:20px;'>{result}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-# قسم الاشتراك الفاخر
+# قسم الاشتراك
 st.markdown("<br><br>", unsafe_allow_html=True)
 c1, c2, c3 = st.columns([1, 2, 1])
-
 with c2:
     st.markdown(f"""
         <div class='premium-card'>
-            <h1 style='color: #fff; text-shadow: 0 0 15px #00f2ff;'>عضوية النخبة الرقمية</h1>
-            <p style='font-size: 4rem; font-weight: 900; color: #00f2ff;'>49$ <small style='font-size: 1rem; color: #fff;'>/ شهر</small></p>
-            <div style='background: rgba(0,0,0,0.6); padding: 25px; border-radius: 20px; border: 1px solid #00f2ff; margin: 25px 0;'>
-                <p style='color: #00f2ff; margin-bottom: 5px; font-weight: bold;'>PAYONEER ID:</p>
-                <p style='font-size: 1.2rem; font-weight: bold; color: #fff;'>SADAM.ALHAJ007@GMAIL.COM</p>
-                <p style='color: #34a853; margin-top: 20px; font-weight: bold;'>USDT WALLET (TRC20):</p>
-                <p style='font-size: 0.8rem; color: #fff; word-break: break-all;'>TKCvNEvz59717dp5QZbrwCqCzTQqjrNxCX</p>
+            <h1 style='color: #fff;'>عضوية النخبة الرقمية</h1>
+            <p style='font-size: 4rem; font-weight: 900; color: #00f2ff;'>49$</p>
+            <div style='background: rgba(0,0,0,0.6); padding: 25px; border-radius: 20px; border: 1px solid #00f2ff;'>
+                <p>SADAM.ALHAJ007@GMAIL.COM</p>
+                <p style='font-size: 0.8rem;'>TKCvNEvz59717dp5QZbrwCqCzTQqjrNxCX</p>
             </div>
-            <a href="mailto:SADAM.ALHAJ007@GMAIL.COM" class='glass-active-btn'>
-                تفعيل العضوية الآن 💎
-            </a>
+            <a href="mailto:SADAM.ALHAJ007@GMAIL.COM" class='glass-active-btn'>تفعيل العضوية الآن</a>
         </div>
     """, unsafe_allow_html=True)
-
-st.markdown("<br><br><p style='text-align: center; color: #333;'>POWERED BY SADAM AL-HAJ AI LABS v3.0</p>", unsafe_allow_html=True)
