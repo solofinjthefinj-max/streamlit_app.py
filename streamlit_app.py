@@ -7,18 +7,18 @@ st.set_page_config(page_title="EcomMind AI Ultra Pro", layout="wide")
 # --- التصميم المتكامل (CSS) ---
 st.markdown("""
     <style>
-    /* تنسيق الغلاف (الصورة العرضية) */
+    /* تنسيق الغلاف (الصورة العرضية) في الأعلى */
     .cover-container {
         width: 100%;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
     }
     .cover-img {
         width: 100%;
-        max-width: 1100px;
-        border-radius: 25px;
-        box-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
-        border: 1px solid rgba(0, 242, 255, 0.3);
+        max-width: 1000px; /* حجم الغلاف */
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+        border: 1px solid rgba(0, 242, 255, 0.2);
     }
 
     /* 1. الخلفية التقنية (أيقونات ذكاء اصطناعي ورموز إلكترونية) */
@@ -36,7 +36,7 @@ st.markdown("""
     .neon-title {
         color: #00f2ff;
         text-align: center;
-        font-size: 3.5rem !important;
+        font-size: 4rem !important;
         font-weight: 900;
         text-shadow: 0 0 20px #00f2ff, 0 0 40px #0062ff;
         font-family: 'Courier New', Courier, monospace;
@@ -108,8 +108,8 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- دمج الغلاف السينمائي في أعلى الصفحة ---
-# ملاحظة: تأكد من رفع الصورة العرضية باسم cover.png في GitHub
+# --- إضافة الغلاف السينمائي في أعلى الصفحة ---
+# تأكد من أنك رفعت الصورة العرضية في GitHub باسم cover.png
 st.markdown("""
     <div class="cover-container">
         <img src="https://raw.githubusercontent.com/alhajameer4-del/Python/main/cover.png" class="cover-img">
@@ -138,6 +138,7 @@ st.markdown("<p style='text-align: center; color: #00f2ff; font-weight: bold; le
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     st.markdown("<div style='margin-top: 40px;'>", unsafe_allow_html=True)
+    # الخانة الآن مجبرة على اللون الداكن
     product_name = st.text_input("📦 ما هو المنتج الذي تريد تسويقه بذكاء؟", key="product_input")
     if st.button("إطلاق الذكاء الشعاعي ✨"):
         if product_name:
